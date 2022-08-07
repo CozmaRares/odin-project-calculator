@@ -25,6 +25,7 @@ body {
   background-color: #515151;
   padding: 1rem;
   border-radius: var(--button-edge-radius);
+  user-select: none;
 }
 
 #display {
@@ -62,21 +63,26 @@ button:hover {
   background-color: #e1e17a;
 }
 
-button.C {
-  border-top-left-radius: var(--button-edge-radius);
-}
-
-button.C:hover {
+button.active,
+button:active {
   background-color: red;
 }
 
-button.backspace {
+button#clear {
+  border-top-left-radius: var(--button-edge-radius);
+}
+
+button#clear:hover {
+  background-color: red;
+}
+
+button#backspace {
   width: calc(2 * var(--button-size) + var(--button-gap));
   grid-column: 3/5;
   border-top-right-radius: var(--button-edge-radius);
 }
 
-button.backspace:hover {
+button#backspace:hover {
   background-color: gray;
 }
 
@@ -84,24 +90,24 @@ button.operation:hover {
   background-color: lightskyblue;
 }
 
-button.plus {
+button#plus {
   grid-row: 3/5;
   grid-column: 4/5;
   height: calc(2 * var(--button-size) + var(--button-gap));
 }
 
-button.equals {
+button#equals {
   grid-row: 5/7;
   grid-column: 4/5;
   height: calc(2 * var(--button-size) + var(--button-gap));
   border-bottom-right-radius: var(--button-edge-radius);
 }
 
-button.equals:hover {
+button#equals:hover {
   background-color: aqua;
 }
 
-button.zero {
+button#zero {
   width: calc(2 * var(--button-size) + var(--button-gap));
   grid-column: 1/3;
   border-bottom-left-radius: var(--button-edge-radius);

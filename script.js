@@ -156,7 +156,6 @@ function evaluateEquation() {
     }
   };
 
-  debugger;
   const result = evaluateTerm();
 
   clearDisplay();
@@ -165,16 +164,29 @@ function evaluateEquation() {
 }
 
 const keys = [
-  { key: "0", handler: () => addText("0") },
-  { key: "1", handler: () => addText("1") },
-  { key: "2", handler: () => addText("2") },
-  { key: "3", handler: () => addText("3") },
-  { key: "4", handler: () => addText("4") },
-  { key: "5", handler: () => addText("5") },
-  { key: "6", handler: () => addText("6") },
-  { key: "7", handler: () => addText("7") },
-  { key: "8", handler: () => addText("8") },
-  { key: "9", handler: () => addText("9") }
+  { key: "c", buttonId: "clear" },
+  { key: "C", buttonId: "clear" },
+  { key: "(", buttonId: "brackets" },
+  { key: ")", buttonId: "brackets" },
+  { key: "Backspace", buttonId: "backspace" },
+  { key: "^", buttonId: "power" },
+  { key: "/", buttonId: "divide" },
+  { key: "*", buttonId: "multiply" },
+  { key: "-", buttonId: "subtract" },
+  { key: "+", buttonId: "plus" },
+  { key: "=", buttonId: "equals" },
+  { key: "Enter", buttonId: "equals" },
+  { key: "0", buttonId: "zero" },
+  { key: "1", buttonId: "one" },
+  { key: "2", buttonId: "two" },
+  { key: "3", buttonId: "three" },
+  { key: "4", buttonId: "four" },
+  { key: "5", buttonId: "five" },
+  { key: "6", buttonId: "six" },
+  { key: "7", buttonId: "seven" },
+  { key: "8", buttonId: "eight" },
+  { key: "9", buttonId: "nine" },
+  { key: ".", buttonId: "decimal" }
 ];
 
 document.addEventListener(
@@ -182,8 +194,18 @@ document.addEventListener(
   (e) => {
     console.log(e.key);
 
-    keys.forEach(({ key, handler }) => {
-      if (key == e.key) handler();
+    keys.forEach(({ key, buttonId }) => {
+      if (key !== e.key) return;
+
+      const btn = document.getElementById(buttonId);
+
+      btn.classList.add("active");
+
+      setTimeout(() => {
+        btn.classList.remove("active");
+      }, 50);
+
+      btn.click();
     });
   },
   true

@@ -18,28 +18,36 @@
     <div class="container">
       <div id="display"></div>
       <div class="buttons">
-        <button onclick="clearDisplay()" class="C">C</button>
-        <button onclick="addBrackets()" class="operation">()</button>
-        <button onclick="deleteLast()" class="backspace">
+        <button onclick="clearDisplay()" id="clear">C</button>
+        <button onclick="addBrackets()" id="brackets" class="operation">
+          ()
+        </button>
+        <button onclick="deleteLast()" id="backspace">
           <i class="fa-solid fa-delete-left"></i>
         </button>
-        <button onclick="addPower()" class="operation">x<sup>y</sup></button>
-        <button onclick="addText('/')" class="operation">/</button>
-        <button onclick="addText('*')" class="operation">*</button>
-        <button onclick="addText('-')" class="operation">-</button>
-        <button onclick="addText('7')">7</button>
-        <button onclick="addText('8')">8</button>
-        <button onclick="addText('9')">9</button>
-        <button onclick="addText('+')" class="plus operation">+</button>
-        <button onclick="addText('4')">4</button>
-        <button onclick="addText('5')">5</button>
-        <button onclick="addText('6')">6</button>
-        <button onclick="addText('1')">1</button>
-        <button onclick="addText('2')">2</button>
-        <button onclick="addText('3')">3</button>
-        <button onclick="evaluateEquation()" class="equals">=</button>
-        <button onclick="addText('0')" class="zero">0</button>
-        <button onclick="addText('.')">.</button>
+        <button onclick="addPower()" id="power" class="operation">
+          x<sup>y</sup>
+        </button>
+        <button onclick="addText('/')" id="divide" class="operation">/</button>
+        <button onclick="addText('*')" id="multiply" class="operation">
+          *
+        </button>
+        <button onclick="addText('-')" id="subtract" class="operation">
+          -
+        </button>
+        <button onclick="addText('7')" id="seven">7</button>
+        <button onclick="addText('8')" id="eight">8</button>
+        <button onclick="addText('9')" id="nine">9</button>
+        <button onclick="addText('+')" id="plus" class="operation">+</button>
+        <button onclick="addText('4')" id="four">4</button>
+        <button onclick="addText('5')" id="five">5</button>
+        <button onclick="addText('6')" id="six">6</button>
+        <button onclick="addText('1')" id="one">1</button>
+        <button onclick="addText('2')" id="two">2</button>
+        <button onclick="addText('3')" id="three">3</button>
+        <button onclick="evaluateEquation()" id="equals">=</button>
+        <button onclick="addText('0')" id="zero">0</button>
+        <button onclick="addText('.')" id="decimal">.</button>
       </div>
     </div>
   </body>
