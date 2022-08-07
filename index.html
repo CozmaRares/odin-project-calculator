@@ -18,28 +18,28 @@
     <div class="container">
       <div id="display"></div>
       <div class="buttons">
-        <button class="C">C</button>
-        <button>()</button>
-        <button class="backspace edge">
+        <button onclick="clearDisplay()" class="C">C</button>
+        <button onclick="addBrackets()" class="operation">()</button>
+        <button onclick="deleteLast()" class="backspace">
           <i class="fa-solid fa-delete-left"></i>
         </button>
-        <button>x<sup>y</sup></button>
-        <button>/</button>
-        <button>*</button>
-        <button>-</button>
-        <button>7</button>
-        <button>8</button>
-        <button>9</button>
-        <button class="plus">+</button>
-        <button onclick="a()">4</button>
-        <button>5</button>
-        <button>6</button>
-        <button>1</button>
-        <button>2</button>
-        <button>3</button>
-        <button class="equals edge">=</button>
-        <button class="zero edge">0</button>
-        <button>.</button>
+        <button onclick="addPower()" class="operation">x<sup>y</sup></button>
+        <button onclick="addText('/')" class="operation">/</button>
+        <button onclick="addText('*')" class="operation">*</button>
+        <button onclick="addText('-')" class="operation">-</button>
+        <button onclick="addText('7')">7</button>
+        <button onclick="addText('8')">8</button>
+        <button onclick="addText('9')">9</button>
+        <button onclick="addText('+')" class="plus operation">+</button>
+        <button onclick="addText('4')">4</button>
+        <button onclick="addText('5')">5</button>
+        <button onclick="addText('6')">6</button>
+        <button onclick="addText('1')">1</button>
+        <button onclick="addText('2')">2</button>
+        <button onclick="addText('3')">3</button>
+        <button onclick="evaluateEquation()" class="equals">=</button>
+        <button onclick="addText('0')" class="zero">0</button>
+        <button onclick="addText('.')">.</button>
       </div>
     </div>
   </body>
