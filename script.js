@@ -1,3 +1,6 @@
+const equationsHistory = [];
+const historyElement = document.getElementById("history");
+
 const maxLineLength = 75;
 
 let openBrackets = 0;
@@ -161,6 +164,22 @@ function evaluateEquation() {
   clearDisplay();
   addText(result.error ? "Invalid expression" : result.number);
   deleteOnNextEntry = result.error;
+
+  //update history
+  equationsHistory.push({ equation: str, result: result.number });
+
+  if (equationsHistory.length > 10) equationsHistory.unshift();
+
+  historyElement.innerHTML = "";
+  equationsHistory.forEach(
+    (entry, idx) =>
+      (historyElement.innerHTML += `<li onclick="setFromHistory(${idx})"><p>${entry.equation}</p> = ${entry.result}</li>`)
+  );
+}
+
+function setFromHistory(idx) {
+  clearDisplay();
+  addText(equationsHistory[idx].equation);
 }
 
 const keys = [
@@ -186,14 +205,13 @@ const keys = [
   { key: "7", buttonId: "seven" },
   { key: "8", buttonId: "eight" },
   { key: "9", buttonId: "nine" },
-  { key: ".", buttonId: "decimal" }
+  { key: ".", buttonId: "decimal" },
+  { key: "h", buttonId: "history-btn" }
 ];
 
 document.addEventListener(
   "keydown",
   (e) => {
-    console.log(e.key);
-
     keys.forEach(({ key, buttonId }) => {
       if (key !== e.key) return;
 
@@ -210,3 +228,7 @@ document.addEventListener(
   },
   true
 );
+
+function toggleHistory() {
+  document.getElementById("history").classList.toggle("active");
+}
