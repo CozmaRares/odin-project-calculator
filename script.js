@@ -1,10 +1,16 @@
 const maxLineLength = 75;
 
 let openBrackets = 0;
+let deleteOnNextEntry = false;
 
 const displayElement = document.getElementById("display");
 
 function addText(text) {
+  if (deleteOnNextEntry) {
+    displayElement.innerText = "";
+    deleteOnNextEntry = false;
+  }
+
   if (displayElement.innerText.length < maxLineLength)
     displayElement.innerText += text;
   else displayElement.innerText = "Display limit reached";
@@ -42,6 +48,120 @@ function deleteLast() {
     0,
     displayElement.innerText.length - 1
   );
+}
+
+function evaluateEquation() {
+  const str = displayElement.innerText;
+
+  let currentChar;
+
+  const advance = (() => {
+    let idx = 0;
+
+    return () => (currentChar = idx < str.length ? str[idx++] : null);
+  })();
+
+  advance();
+
+  const binaryOperation = (fn, ops) => {
+    const left = fn();
+
+    if (left.error) return { error: left.error };
+
+    let result = left.number;
+
+    while (currentChar !== null) {
+      if (!ops.some((op) => op === currentChar)) break;
+
+      const op = currentChar;
+
+      advance();
+
+      const right = fn();
+
+      if (right.error) return { error: right.error };
+
+      result = evaluateOperation(result, right.number, op);
+    }
+
+    return { number: result };
+  };
+
+  // order of operations (most significant on top):
+  // base = number or (term)
+  // power =  base ^ base
+  // factor = power ( * or / ) power
+  // term = factor ( + or - ) factor
+
+  const getNumber = () => {
+    let number = "";
+
+    // currentChar is a digit
+    while (/\d/.test(currentChar)) {
+      number += currentChar;
+      advance();
+    }
+
+    if (number === "") return { error: true };
+
+    if (currentChar !== ".") return { number: parseInt(number, 10) };
+
+    number += ".";
+    advance();
+
+    // currentChar is a digit
+    while (/\d/.test(currentChar)) {
+      number += currentChar;
+      advance();
+    }
+
+    // decimal point must be followed by a digit
+    if (number[number.length - 1] === ".") return { error: true };
+
+    return { number: parseFloat(number) };
+  };
+
+  const base = () => {
+    if (/\d/.test(currentChar)) return getNumber();
+
+    if (currentChar === "(") {
+      advance();
+
+      const result = evaluateTerm();
+
+      if (currentChar !== ")") return { error: true };
+
+      return result;
+    }
+
+    return { error: true };
+  };
+
+  const evaluatePower = () => binaryOperation(base, ["^"]);
+  const evaluateFactor = () => binaryOperation(evaluatePower, ["*", "/"]);
+  const evaluateTerm = () => binaryOperation(evaluateFactor, ["+", "-"]);
+
+  const evaluateOperation = (left, right, op) => {
+    switch (op) {
+      case "+":
+        return left + right;
+      case "-":
+        return left - right;
+      case "*":
+        return left * right;
+      case "/":
+        return left / right;
+      case "^":
+        return Math.pow(left, right);
+    }
+  };
+
+  debugger;
+  const result = evaluateTerm();
+
+  clearDisplay();
+  addText(result.error ? "Invalid expression" : result.number);
+  deleteOnNextEntry = result.error;
 }
 
 const keys = [
