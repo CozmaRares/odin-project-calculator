@@ -166,7 +166,10 @@ function evaluateEquation() {
   deleteOnNextEntry = result.error;
 
   //update history
-  equationsHistory.push({ equation: str, result: result.number });
+  equationsHistory.push({
+    equation: str,
+    result: result.number || "Invalid expression"
+  });
 
   if (equationsHistory.length > 10) equationsHistory.unshift();
 

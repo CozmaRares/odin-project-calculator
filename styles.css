@@ -160,6 +160,7 @@ button#zero {
 }
 
 #history li {
+  overflow-wrap: break-word;
   padding: 0.5rem 1rem;
   border-bottom: 1px solid white;
 }
