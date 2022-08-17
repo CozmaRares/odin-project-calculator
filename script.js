@@ -171,7 +171,7 @@ function evaluateEquation() {
     result: result.number || "Invalid expression"
   });
 
-  if (equationsHistory.length > 10) equationsHistory.unshift();
+  if (equationsHistory.length > 5) equationsHistory.shift();
 
   historyElement.innerHTML = "";
   equationsHistory.forEach(
@@ -186,6 +186,7 @@ function setFromHistory(idx) {
 }
 
 const keys = [
+  { key: "Escape", buttonId: "clear" },
   { key: "c", buttonId: "clear" },
   { key: "C", buttonId: "clear" },
   { key: "(", buttonId: "brackets" },
@@ -234,4 +235,9 @@ document.addEventListener(
 
 function toggleHistory() {
   document.getElementById("history").classList.toggle("active");
+}
+
+function btnClick(btn, callback) {
+  btn.blur();
+  callback();
 }
